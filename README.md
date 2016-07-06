@@ -1,6 +1,14 @@
 # sudoku-solver
 Attempt to make a perfect sudoku solver. 
 
+###Given Data Set:
+From this URL, http://www2.warwick.ac.uk/fac/sci/moac/people/students/peter_cock/python/sudoku/
+
+Given a chess board, where A-H goes from left to right, and 1-8 goes from bottom to top, the easy data set in data/easy.txt employs the same scheme for A-H, BUT 1-8 starts from top to bottom. Also note that the Chess board has 8 columns and rows vs the Sudoku board with 9 columns and rows.
+
+The given data is written in such a way that the first 9 numbers are I1, I2, I3...I9. Then the next 9 numbers are the next row counting from top of H1, H2, H3...H9. And so on until the last 9 numbers which represents the bottom most row. A period is used to denote a blank space. 
+
+
 Todo:
 1. Figure out data structure of current sudoku questions. 
 2. Find a way to insert them into cells.
