@@ -1,7 +1,16 @@
+require_relative "board"
+
 class Sudoku
   def import(data)
     data = parse_import(data)
-    # Board.new(data)
+    @board = Board.new(data)
+  end
+
+  def solve
+    until @board.solved?
+      puts "It ain't solved buddy!"
+    end
+    puts "Congrats."
   end
 
   private
@@ -21,16 +30,10 @@ class Sudoku
         nested_data << row
       end
     end
-    
+
   end
 end
 
 a = Sudoku.new
-p a.import(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
-
-
-# class Board
-#   def initialize
-
-#   end
-# end
+a.import(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
+a.solve
