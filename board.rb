@@ -1,22 +1,35 @@
 class Board
 
-  attr_accessor :cells
+  attr_reader :cells, :rows
 
   ROW_ID = ["A","B","C","D","E","F","G","H","I"]
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
 
-  def initialize(data)
-    @cells = []
-    initialize_cells
+  def initialize
+    @cells, @rows = [], []
+    initialize_default_cells
+    initialize_default_rows
+    # initialize_default_columns
+    # initialize_default_blocks
+    # fill_initial_data(data)
     # update_board
   end
 
-  def initialize_cells
-    cell_counter = 0
-    row = 0
-    column = 0
+  def row(id)
+    @rows.each do |row|
+      if row.id == id
+        return row
+      end
+    end
+  end
+
+  # def fill_initial_data(data)
+  # end
+
+  def initialize_default_cells
+    cell_counter, row, column = 0, 0, 0
     block = 1
-    loop do
+    until cell_counter == 81
       if cell_counter % 1 == 0 && cell_counter != 0
         column += 1
       end
@@ -35,51 +48,15 @@ class Board
       end
       @cells << Cell.new(ROW_ID[row], COLUMN_ID[column], block)
       cell_counter += 1
-    break if cell_counter == 81
     end
-    #increases row by 1 every 3 Cell.new, -3 every 9, +3 every 27
-    #increases column by 1 every Cell.new, -3 every 3, +3 every 9, -9 every 27
-    #increases by 1 per 9 Cell.new
+  end
 
-    # Cell.new(ROW_ID[0], COLUMN_ID[0], 1)
-    # Cell.new(ROW_ID[0], COLUMN_ID[1], 1)
-    # Cell.new(ROW_ID[0], COLUMN_ID[2], 1)
-    # Cell.new(ROW_ID[1], COLUMN_ID[0], 1)
-    # Cell.new(ROW_ID[1], COLUMN_ID[1], 1)
-    # Cell.new(ROW_ID[1], COLUMN_ID[2], 1)
-    # Cell.new(ROW_ID[2], COLUMN_ID[0], 1)
-    # Cell.new(ROW_ID[2], COLUMN_ID[1], 1)
-    # Cell.new(ROW_ID[2], COLUMN_ID[2], 1)
-
-    # Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
-    # Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
-    # Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
-    # Cell.new(ROW_ID[2], COLUMN_ID[3], 2)
-    # Cell.new(ROW_ID[2], COLUMN_ID[4], 2)
-    # Cell.new(ROW_ID[2], COLUMN_ID[5], 2)
-
-    # Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
-    # Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
-    # Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
-    # Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
-    # Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
-    # Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
-    # Cell.new(ROW_ID[2], COLUMN_ID[6], 3)
-    # Cell.new(ROW_ID[2], COLUMN_ID[7], 3)
-    # Cell.new(ROW_ID[2], COLUMN_ID[8], 3)
-
-    # Cell.new(ROW_ID[3], COLUMN_ID[0], 4)
-    # Cell.new(ROW_ID[3], COLUMN_ID[1], 4)
-    # Cell.new(ROW_ID[3], COLUMN_ID[2], 4)
-    # Cell.new(ROW_ID[4], COLUMN_ID[0], 4)
-    # Cell.new(ROW_ID[4], COLUMN_ID[1], 4)
-    # Cell.new(ROW_ID[4], COLUMN_ID[2], 4)
-    # Cell.new(ROW_ID[5], COLUMN_ID[0], 4)
-    # Cell.new(ROW_ID[5], COLUMN_ID[1], 4)
-    # Cell.new(ROW_ID[5], COLUMN_ID[2], 4)
+  def initialize_default_rows
+    row_counter = 0
+    until row_counter == 9
+      @rows << Row.new(ROW_ID[row_counter], @cells)
+      row_counter += 1
+    end
   end
 
   # def update_board
@@ -93,7 +70,7 @@ class Board
 end
 
 class Cell
-  attr_reader :x, :y, :block
+  attr_reader :row, :column, :block
   attr_accessor :possible_numbers, :value
   def initialize(x, y, block)
     @row = x
@@ -105,6 +82,16 @@ class Cell
 end
 
 class Row
+  attr_reader :cells, :id
+  def initialize(row_id, all_cells)
+    @cells = []
+    all_cells.map do |cell|
+      if cell.row == row_id
+        @cells << cell
+      end
+    end
+    @id = row_id
+  end
 end
 
 class Column
@@ -113,6 +100,9 @@ end
 class Blocks
 end
 
-a = Board.new("blah")
-p a.cells[80]
-# [[0, 9, 4, 0, 0, 0, 1, 3, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 7, 6, 0, 0, 2], [0, 8, 0, 0, 1, 0, 0, 0, 0], [0, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 6, 0], [0, 0, 0, 0, 5, 0, 4, 0, 0], [0, 0, 0, 0, 0, 8, 0, 0, 7], [0, 0, 6, 3, 0, 4, 0, 0, 8]]
+parsed_data = [[0, 9, 4, 0, 0, 0, 1, 3, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 7, 6, 0, 0, 2], [0, 8, 0, 0, 1, 0, 0, 0, 0], [0, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 6, 0], [0, 0, 0, 0, 5, 0, 4, 0, 0], [0, 0, 0, 0, 0, 8, 0, 0, 7], [0, 0, 6, 3, 0, 4, 0, 0, 8]]
+
+a = Board.new
+# p a.rows
+
+p a.row("A").cells.count
