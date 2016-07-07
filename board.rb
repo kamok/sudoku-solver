@@ -4,16 +4,52 @@ class Board
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
 
   def initialize(data)
-    # @cells = 
+    @cells = []
+    initialize_cells
 
 
     # update_board
   end
 
-  def update_board
+  def initialize_cells
+    #increases row by 1 every 9 Cell.new.
+    #increases column by 1 every Cell.new, resets to 0 when it hits 9 Cell.new
+    #
+
+    row_counter
+    column_counter
+
+    Cell.new(ROW_ID[0], COLUMN_ID[0], 1)
+    Cell.new(ROW_ID[0], COLUMN_ID[1], 1)
+    Cell.new(ROW_ID[0], COLUMN_ID[2], 1)
+    Cell.new(ROW_ID[1], COLUMN_ID[0], 1)
+    Cell.new(ROW_ID[1], COLUMN_ID[1], 1)
+    Cell.new(ROW_ID[1], COLUMN_ID[2], 1)
+    Cell.new(ROW_ID[2], COLUMN_ID[0], 1)
+    Cell.new(ROW_ID[2], COLUMN_ID[1], 1)
+    Cell.new(ROW_ID[2], COLUMN_ID[2], 1)
+
+    # Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
+    # Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
+    # Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
+
+    # Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
+    # Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
+    # Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
+
+
+  end
+
+  # def update_board
     #this method run "update" on all the observers, eg
     #Blocks, Row, Column, Cell
-  end
+  # end
 
   def solved?
     true
@@ -30,8 +66,6 @@ class Cell
     @possible_numbers = [1,2,3,4,5,6,7,8,9]
     @value = 0
   end
-  # def update
-  # end
 end
 
 class Row
