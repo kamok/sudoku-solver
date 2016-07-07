@@ -11,7 +11,8 @@ The given data is written in such a way that the first 9 numbers start from the 
 Reference point is the top left, same as data. Starting from the first cell which is A1, A2, A3...A9. Next row is B1, B2, B3...B9. 
 
 Todo:
-1. Figure out data structure of current sudoku questions. 
+<!-- 1. Figure out data structure of current sudoku questions.  -->
+* Continue growing board to allow initial placement of values into each cell
 2. Find a way to insert them into cells.
 3. Need: individual representation of cells, rows, columns, and 3x3 blocks
 
