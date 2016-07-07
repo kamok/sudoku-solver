@@ -11,8 +11,6 @@ class Board
     initialize_default_rows
     # initialize_default_columns
     # initialize_default_blocks
-    # fill_initial_data(data)
-    # update_board
   end
 
   def row(id)
@@ -23,8 +21,21 @@ class Board
     end
   end
 
-  # def fill_initial_data(data)
-  # end
+  def fill_initial_values(data)
+    @rows.each do |row|
+      row.cells.each do |cell|
+        cell.value = data.shift
+      end
+    end
+
+    require 'pry'
+    binding.pry
+    # data.each do |row_array|
+    #   row_array.each do |value|
+
+    # @rows
+
+  end
 
   def initialize_default_cells
     cell_counter, row, column = 0, 0, 0
@@ -99,10 +110,3 @@ end
 
 class Blocks
 end
-
-parsed_data = [[0, 9, 4, 0, 0, 0, 1, 3, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 7, 6, 0, 0, 2], [0, 8, 0, 0, 1, 0, 0, 0, 0], [0, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 6, 0], [0, 0, 0, 0, 5, 0, 4, 0, 0], [0, 0, 0, 0, 0, 8, 0, 0, 7], [0, 0, 6, 3, 0, 4, 0, 0, 8]]
-
-a = Board.new
-# p a.rows
-
-p a.row("A").cells.count

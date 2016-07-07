@@ -4,8 +4,8 @@ class Sudoku
 
   def set_game(data)
     data = parse_import(data)
-    # @board = Board.new
-    # @board.fill_initial_data(data)
+    @board = Board.new
+    @board.fill_initial_values(data)
   end
 
   def solve
@@ -20,18 +20,19 @@ class Sudoku
   def parse_import(raw_data)
     single_large_array = 
     raw_data.split("").map do |value|
-      value == "." ? value = 0 : value
+      value == "." ? value = 0 : value.to_i
     end
 
-    [].tap do |nested_data|
-      until single_large_array.empty?
-        row = []
-        9.times do 
-          row << single_large_array.shift.to_i
-        end
-        nested_data << row
-      end
-    end
+    # This code makes everything into nested form by row.
+    # [].tap do |nested_data|
+    #   until single_large_array.empty?
+    #     row = []
+    #     9.times do 
+    #       row << single_large_array.shift.to_i
+    #     end
+    #     nested_data << row
+    #   end
+    # end
 
   end
 end
