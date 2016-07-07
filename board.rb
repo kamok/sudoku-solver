@@ -1,15 +1,21 @@
+require_relative "cell"
+require_relative "row"
+require_relative "column"
+require_relative "block"
+
 class Board
-  attr_reader :cells, :rows, :columns
+  attr_reader :cells, :rows, :columns, :blocks
 
   ROW_ID = ["A","B","C","D","E","F","G","H","I"]
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
+  BLOCK_ID = COLUMN_ID
 
   def initialize
-    @cells, @rows, @columns = [], [], []
+    @cells, @rows, @columns, @blocks = [], [], [], []
     initialize_default_cells
     initialize_default_rows
     initialize_default_columns
-    # initialize_default_blocks
+    initialize_default_blocks
   end
 
   # def row(id)
@@ -58,6 +64,17 @@ class Board
         cell.possible_values -= column_values
       end
     end
+
+    @blocks.each do |block|
+      block_values = []
+      block.cells.each do |cell|
+        block_values << cell.value if cell.value > 0
+      end
+
+      block.cells.each do |cell|
+        cell.possible_values -= block_values
+      end
+    end
   end
 
   def initialize_default_cells
@@ -103,6 +120,14 @@ class Board
     end
   end
 
+  def initialize_default_blocks
+    block_counter = 0
+    until block_counter == 9
+      @blocks << Block.new(BLOCK_ID[block_counter], @cells)
+      block_counter += 1
+    end
+  end
+
   # def update_board
     #this method run "update" on all the observers, eg
     #Blocks, Row, Column, Cell
@@ -110,54 +135,23 @@ class Board
 
   def solved?
     #Row says OK
+    # solved_rows = 0
+    # rows.each do |row|
+    #   row.cells.each do |cell|
+    #     if cell.value != 0
+
     #Column says OK
     #Block says OK
-  end
-end
-
-class Cell
-  attr_reader :row, :column, :block
-  attr_accessor :possible_values, :value
-  def initialize(x, y, block)
-    @row = x
-    @column = y
-    @block = block
-    @possible_values = [1,2,3,4,5,6,7,8,9]
-    @value = 0
-  end
-
-  def update
-    #looks at 
-  end
-end
-
-class Row
-  attr_reader :cells, :id
-  # attr_accessor :row_values
-  def initialize(row_id, all_cells)
-    @cells = []
-    all_cells.map do |cell|
-      if cell.row == row_id
-        @cells << cell
+    solved_cells = 0
+    cells.each do |cell|
+      if cell.value != 0
+        solved_cells += 1
       end
     end
-    @id = row_id
-  end
-end
-
-class Column
-  attr_reader :cells, :id
-  # attr_accessor :column_values
-  def initialize(column_id, all_cells)
-    @cells = []
-    all_cells.map do |cell|
-      if cell.column == column_id
-        @cells << cell
-      end
+    if solved_cells == 81
+      return true
+    else
+      return false
     end
-    @id = column_id
   end
-end
-
-class Blocks
 end

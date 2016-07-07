@@ -11,7 +11,12 @@ class Sudoku
 
   def solve
     until @board.solved?
-      puts "It ain't solved buddy!"
+      @board.cells.each do |cell|
+        cell.solve
+      end
+      @board.update_possible_values
+      # require 'pry'
+      # binding.pry
     end
     puts "Congrats."
   end
@@ -39,7 +44,8 @@ class Sudoku
 end
 
 a = Sudoku.new
-a.set_game(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
+a.set_game("39.82.7..8.15...69.2.16.4.3..2.96.58935...6.2.6.752.3.7.3941...2...3759..19...347")
+a.solve
 a.board.cells.each do |cell| 
-  p cell.possible_values
+  p cell.value
 end
