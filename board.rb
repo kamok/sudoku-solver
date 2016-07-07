@@ -29,11 +29,22 @@ class Board
     end
   end
 
-  def update_possible_values
-    #if a block has value, then all possible_values are deleted
-    @cells.each do |cell|
-      if cell.value != 0
-        cell.possible_values.clear
+  def update_possible_values                  # This method should remove possible_values from all cells given 
+                                              # the current state of the board.
+    @cells.each do |cell|   
+      if cell.value != 0                      #if a block has value, then all possible_values are deleted
+        cell.possible_values.clear 
+      end
+    end
+
+    @rows.each do |row|
+      row_values = []
+      row.cells.each do |cell|
+        row_values << cell.value if cell.value > 0  #row_values array has all values of that row 
+      end
+
+      row.cells.each do |cell|
+        cell.possible_values -= row_values
       end
     end
   end
@@ -103,6 +114,7 @@ end
 
 class Row
   attr_reader :cells, :id
+  attr_accessor :row_values
   def initialize(row_id, all_cells)
     @cells = []
     all_cells.map do |cell|
