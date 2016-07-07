@@ -1,61 +1,85 @@
 class Board
 
+  attr_accessor :cells
+
   ROW_ID = ["A","B","C","D","E","F","G","H","I"]
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
 
   def initialize(data)
     @cells = []
     initialize_cells
-
-
     # update_board
   end
 
   def initialize_cells
+    cell_counter = 0
+    row = 0
+    column = 0
+    block = 1
+    loop do
+      if cell_counter % 1 == 0 && cell_counter != 0
+        column += 1
+      end
+      if cell_counter % 3 == 0 && cell_counter != 0
+        row += 1
+        column -= 3
+      end
+      if cell_counter % 9 == 0 && cell_counter != 0
+        row -= 3 
+        column += 3
+        block += 1
+      end
+      if cell_counter % 27 == 0 && cell_counter != 0
+        row += 3
+        column -= 9
+      end
+      @cells << Cell.new(ROW_ID[row], COLUMN_ID[column], block)
+      cell_counter += 1
+    break if cell_counter == 81
+    end
     #increases row by 1 every 3 Cell.new, -3 every 9, +3 every 27
     #increases column by 1 every Cell.new, -3 every 3, +3 every 9, -9 every 27
     #increases by 1 per 9 Cell.new
 
-    Cell.new(ROW_ID[0], COLUMN_ID[0], 1)
-    Cell.new(ROW_ID[0], COLUMN_ID[1], 1)
-    Cell.new(ROW_ID[0], COLUMN_ID[2], 1)
-    Cell.new(ROW_ID[1], COLUMN_ID[0], 1)
-    Cell.new(ROW_ID[1], COLUMN_ID[1], 1)
-    Cell.new(ROW_ID[1], COLUMN_ID[2], 1)
-    Cell.new(ROW_ID[2], COLUMN_ID[0], 1)
-    Cell.new(ROW_ID[2], COLUMN_ID[1], 1)
-    Cell.new(ROW_ID[2], COLUMN_ID[2], 1)
+    # Cell.new(ROW_ID[0], COLUMN_ID[0], 1)
+    # Cell.new(ROW_ID[0], COLUMN_ID[1], 1)
+    # Cell.new(ROW_ID[0], COLUMN_ID[2], 1)
+    # Cell.new(ROW_ID[1], COLUMN_ID[0], 1)
+    # Cell.new(ROW_ID[1], COLUMN_ID[1], 1)
+    # Cell.new(ROW_ID[1], COLUMN_ID[2], 1)
+    # Cell.new(ROW_ID[2], COLUMN_ID[0], 1)
+    # Cell.new(ROW_ID[2], COLUMN_ID[1], 1)
+    # Cell.new(ROW_ID[2], COLUMN_ID[2], 1)
 
-    Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
-    Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
-    Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
-    Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
-    Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
-    Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
-    Cell.new(ROW_ID[2], COLUMN_ID[3], 2)
-    Cell.new(ROW_ID[2], COLUMN_ID[4], 2)
-    Cell.new(ROW_ID[2], COLUMN_ID[5], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
+    # Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
+    # Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
+    # Cell.new(ROW_ID[2], COLUMN_ID[3], 2)
+    # Cell.new(ROW_ID[2], COLUMN_ID[4], 2)
+    # Cell.new(ROW_ID[2], COLUMN_ID[5], 2)
 
+    # Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
+    # Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
+    # Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
+    # Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
+    # Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
+    # Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
+    # Cell.new(ROW_ID[2], COLUMN_ID[6], 3)
+    # Cell.new(ROW_ID[2], COLUMN_ID[7], 3)
+    # Cell.new(ROW_ID[2], COLUMN_ID[8], 3)
 
-    Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
-    Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
-    Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
-    Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
-    Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
-    Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
-    Cell.new(ROW_ID[2], COLUMN_ID[6], 3)
-    Cell.new(ROW_ID[2], COLUMN_ID[7], 3)
-    Cell.new(ROW_ID[2], COLUMN_ID[8], 3)
-
-    Cell.new(ROW_ID[3], COLUMN_ID[0], 4)
-    Cell.new(ROW_ID[3], COLUMN_ID[1], 4)
-    Cell.new(ROW_ID[3], COLUMN_ID[2], 4)
-    Cell.new(ROW_ID[4], COLUMN_ID[0], 4)
-    Cell.new(ROW_ID[4], COLUMN_ID[1], 4)
-    Cell.new(ROW_ID[4], COLUMN_ID[2], 4)
-    Cell.new(ROW_ID[5], COLUMN_ID[0], 4)
-    Cell.new(ROW_ID[5], COLUMN_ID[1], 4)
-    Cell.new(ROW_ID[5], COLUMN_ID[2], 4)
+    # Cell.new(ROW_ID[3], COLUMN_ID[0], 4)
+    # Cell.new(ROW_ID[3], COLUMN_ID[1], 4)
+    # Cell.new(ROW_ID[3], COLUMN_ID[2], 4)
+    # Cell.new(ROW_ID[4], COLUMN_ID[0], 4)
+    # Cell.new(ROW_ID[4], COLUMN_ID[1], 4)
+    # Cell.new(ROW_ID[4], COLUMN_ID[2], 4)
+    # Cell.new(ROW_ID[5], COLUMN_ID[0], 4)
+    # Cell.new(ROW_ID[5], COLUMN_ID[1], 4)
+    # Cell.new(ROW_ID[5], COLUMN_ID[2], 4)
   end
 
   # def update_board
@@ -89,4 +113,6 @@ end
 class Blocks
 end
 
+a = Board.new("blah")
+p a.cells[80]
 # [[0, 9, 4, 0, 0, 0, 1, 3, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 7, 6, 0, 0, 2], [0, 8, 0, 0, 1, 0, 0, 0, 0], [0, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 6, 0], [0, 0, 0, 0, 5, 0, 4, 0, 0], [0, 0, 0, 0, 0, 8, 0, 0, 7], [0, 0, 6, 3, 0, 4, 0, 0, 8]]
