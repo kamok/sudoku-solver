@@ -1,9 +1,10 @@
 require_relative "board"
 
 class Sudoku
+
   def import(data)
     data = parse_import(data)
-    @board = Board.new(data)
+    # @board = Board.new(data)
   end
 
   def solve
@@ -35,5 +36,4 @@ class Sudoku
 end
 
 a = Sudoku.new
-a.import(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
-a.solve
+p a.import(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
