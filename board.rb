@@ -1,14 +1,14 @@
 class Board
-  attr_reader :cells, :rows
+  attr_reader :cells, :rows, :columns
 
   ROW_ID = ["A","B","C","D","E","F","G","H","I"]
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
 
   def initialize
-    @cells, @rows = [], []
+    @cells, @rows, @columns = [], [], []
     initialize_default_cells
     initialize_default_rows
-    # initialize_default_columns
+    initialize_default_columns
     # initialize_default_blocks
   end
 
@@ -45,6 +45,17 @@ class Board
 
       row.cells.each do |cell|
         cell.possible_values -= row_values
+      end
+    end
+
+    @columns.each do |column|
+      column_values = []
+      column.cells.each do |cell|
+        column_values << cell.value if cell.value > 0
+      end
+
+      column.cells.each do |cell|
+        cell.possible_values -= column_values
       end
     end
   end
@@ -84,6 +95,14 @@ class Board
     end
   end
 
+  def initialize_default_columns
+    column_counter = 0
+    until column_counter == 9
+      @columns << Column.new(COLUMN_ID[column_counter], @cells)
+      column_counter += 1
+    end
+  end
+
   # def update_board
     #this method run "update" on all the observers, eg
     #Blocks, Row, Column, Cell
@@ -114,7 +133,7 @@ end
 
 class Row
   attr_reader :cells, :id
-  attr_accessor :row_values
+  # attr_accessor :row_values
   def initialize(row_id, all_cells)
     @cells = []
     all_cells.map do |cell|
@@ -127,6 +146,17 @@ class Row
 end
 
 class Column
+  attr_reader :cells, :id
+  # attr_accessor :column_values
+  def initialize(column_id, all_cells)
+    @cells = []
+    all_cells.map do |cell|
+      if cell.column == column_id
+        @cells << cell
+      end
+    end
+    @id = column_id
+  end
 end
 
 class Blocks
