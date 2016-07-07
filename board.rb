@@ -20,10 +20,20 @@ class Board
   #   end
   # end
 
-  def fill_initial_values(data)
+  def set_initial_values(data)
+    #write it inside the cell.value
     @rows.each do |row|
       row.cells.each do |cell|
         cell.value = data.shift
+      end
+    end
+  end
+
+  def update_possible_values
+    #if a block has value, then all possible_values are deleted
+    @cells.each do |cell|
+      if cell.value != 0
+        cell.possible_values.clear
       end
     end
   end
@@ -69,19 +79,25 @@ class Board
   # end
 
   def solved?
-    true
+    #Row says OK
+    #Column says OK
+    #Block says OK
   end
 end
 
 class Cell
   attr_reader :row, :column, :block
-  attr_accessor :possible_numbers, :value
+  attr_accessor :possible_values, :value
   def initialize(x, y, block)
     @row = x
     @column = y
     @block = block
-    @possible_numbers = [1,2,3,4,5,6,7,8,9]
+    @possible_values = [1,2,3,4,5,6,7,8,9]
     @value = 0
+  end
+
+  def update
+    #looks at 
   end
 end
 

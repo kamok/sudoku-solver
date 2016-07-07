@@ -5,7 +5,8 @@ class Sudoku
   def set_game(data)
     data = parse_import(data)
     @board = Board.new
-    @board.fill_initial_values(data)
+    @board.set_initial_values(data)
+    @board.update_possible_values
   end
 
   def solve
@@ -40,5 +41,5 @@ end
 a = Sudoku.new
 a.set_game(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
 a.board.cells.each do |cell| 
-  puts cell.value 
+  p cell.possible_values
 end
