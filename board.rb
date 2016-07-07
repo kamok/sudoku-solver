@@ -1,5 +1,4 @@
 class Board
-
   attr_reader :cells, :rows
 
   ROW_ID = ["A","B","C","D","E","F","G","H","I"]
@@ -13,21 +12,21 @@ class Board
     # initialize_default_blocks
   end
 
-  def row(id)
-    @rows.each do |row|
-      if row.id == id
-        return row
-      end
-    end
-  end
-
-  # def fill_initial_values(data)
+  # def row(id)
   #   @rows.each do |row|
-  #     row.cells.each do |cell|
-  #       cell.value = data.shift
+  #     if row.id == id
+  #       return row
   #     end
   #   end
   # end
+
+  def fill_initial_values(data)
+    @rows.each do |row|
+      row.cells.each do |cell|
+        cell.value = data.shift
+      end
+    end
+  end
 
   def initialize_default_cells
     cell_counter, row, column = 0,0,0
@@ -104,6 +103,3 @@ end
 
 class Blocks
 end
-
-a = Board.new
-p a.rows

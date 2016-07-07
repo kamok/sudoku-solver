@@ -1,7 +1,7 @@
 require_relative "board"
 
 class Sudoku
-
+  attr_reader :board
   def set_game(data)
     data = parse_import(data)
     @board = Board.new
@@ -38,4 +38,7 @@ class Sudoku
 end
 
 a = Sudoku.new
-p a.set_game(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
+a.set_game(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
+a.board.cells.each do |cell| 
+  puts cell.value 
+end
