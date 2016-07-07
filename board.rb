@@ -12,12 +12,9 @@ class Board
   end
 
   def initialize_cells
-    #increases row by 1 every 9 Cell.new.
-    #increases column by 1 every Cell.new, resets to 0 when it hits 9 Cell.new
-    #
-
-    row_counter
-    column_counter
+    #increases row by 1 every 3 Cell.new, -3 every 9, +3 every 27
+    #increases column by 1 every Cell.new, -3 every 3, +3 every 9, -9 every 27
+    #increases by 1 per 9 Cell.new
 
     Cell.new(ROW_ID[0], COLUMN_ID[0], 1)
     Cell.new(ROW_ID[0], COLUMN_ID[1], 1)
@@ -29,21 +26,36 @@ class Board
     Cell.new(ROW_ID[2], COLUMN_ID[1], 1)
     Cell.new(ROW_ID[2], COLUMN_ID[2], 1)
 
-    # Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
-    # Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
-    # Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
-    # Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
-    # Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
-    # Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
-
-    # Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
-    # Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
-    # Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
-    # Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
+    Cell.new(ROW_ID[0], COLUMN_ID[3], 2)
+    Cell.new(ROW_ID[0], COLUMN_ID[4], 2)
+    Cell.new(ROW_ID[0], COLUMN_ID[5], 2)
+    Cell.new(ROW_ID[1], COLUMN_ID[3], 2)
+    Cell.new(ROW_ID[1], COLUMN_ID[4], 2)
+    Cell.new(ROW_ID[1], COLUMN_ID[5], 2)
+    Cell.new(ROW_ID[2], COLUMN_ID[3], 2)
+    Cell.new(ROW_ID[2], COLUMN_ID[4], 2)
+    Cell.new(ROW_ID[2], COLUMN_ID[5], 2)
 
 
+    Cell.new(ROW_ID[0], COLUMN_ID[6], 3)
+    Cell.new(ROW_ID[0], COLUMN_ID[7], 3)
+    Cell.new(ROW_ID[0], COLUMN_ID[8], 3)
+    Cell.new(ROW_ID[1], COLUMN_ID[6], 3)
+    Cell.new(ROW_ID[1], COLUMN_ID[7], 3)
+    Cell.new(ROW_ID[1], COLUMN_ID[8], 3)
+    Cell.new(ROW_ID[2], COLUMN_ID[6], 3)
+    Cell.new(ROW_ID[2], COLUMN_ID[7], 3)
+    Cell.new(ROW_ID[2], COLUMN_ID[8], 3)
+
+    Cell.new(ROW_ID[3], COLUMN_ID[0], 4)
+    Cell.new(ROW_ID[3], COLUMN_ID[1], 4)
+    Cell.new(ROW_ID[3], COLUMN_ID[2], 4)
+    Cell.new(ROW_ID[4], COLUMN_ID[0], 4)
+    Cell.new(ROW_ID[4], COLUMN_ID[1], 4)
+    Cell.new(ROW_ID[4], COLUMN_ID[2], 4)
+    Cell.new(ROW_ID[5], COLUMN_ID[0], 4)
+    Cell.new(ROW_ID[5], COLUMN_ID[1], 4)
+    Cell.new(ROW_ID[5], COLUMN_ID[2], 4)
   end
 
   # def update_board
