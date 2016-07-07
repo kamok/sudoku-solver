@@ -10,4 +10,14 @@ class Row
     end
     @id = row_id
   end
+
+  def values
+    values = []
+    @cells.each do |cell|
+      values << cell.value
+    end
+    values
+    # require 'pry'
+    # binding.pry
+  end
 end

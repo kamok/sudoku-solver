@@ -128,11 +128,6 @@ class Board
     end
   end
 
-  # def update_board
-    #this method run "update" on all the observers, eg
-    #Blocks, Row, Column, Cell
-  # end
-
   def solved?
     #Row says OK
     # solved_rows = 0
@@ -151,7 +146,14 @@ class Board
     if solved_cells == 81
       return true
     else
+      puts "The number of solved cells are #{solved_cells}."
       return false
+    end
+  end
+
+  def display_board
+    @rows.each do |row|
+      p row.values
     end
   end
 end
