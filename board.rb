@@ -30,62 +30,30 @@ class Board
   # end
 
   def initialize_default_cells
-    # column + 1 every 1
-    # column - 9 every 9
-
-    # row + 1 every 9
-
-    # block + 1 every 3
-    # block - 3 every 9
-    # block + 3 every 27
-
     cell_counter, row, column = 0,0,0
     block = 1
+
     until cell_counter == 81
-      #break if cell_counter == 0
-      if cell_counter % 1 == 0 && cell_counter != 0
-        column += 1
-      end
-      if cell_counter % 3 == 0 && cell_counter != 0
-        block += 1
-      end
-      if cell_counter % 9 == 0 && cell_counter != 0
-        column -= 9
-        row += 1
-        block -= 3
-      end
-      if cell_counter % 27 == 0 && cell_counter != 0
-        block += 3
+      1.times do 
+        break if cell_counter == 0
+        if cell_counter % 1 == 0
+          column += 1
+        end
+        if cell_counter % 3 == 0
+          block += 1
+        end
+        if cell_counter % 9 == 0
+          column -= 9
+          row += 1
+          block -= 3
+        end
+        if cell_counter % 27 == 0
+          block += 3
+        end
       end
       @cells << Cell.new(ROW_ID[row], COLUMN_ID[column], block)
       cell_counter += 1
     end
-
-
-
-
-    # cell_counter, row, column = 0, 0, 0
-    # block = 1
-    # until cell_counter == 81
-    #   if cell_counter % 1 == 0 && cell_counter != 0
-    #     column += 1
-    #   end
-    #   if cell_counter % 3 == 0 && cell_counter != 0
-    #     row += 1
-    #     column -= 3
-    #   end
-    #   if cell_counter % 9 == 0 && cell_counter != 0
-    #     row -= 3 
-    #     column += 3
-    #     block += 1
-    #   end
-    #   if cell_counter % 27 == 0 && cell_counter != 0
-    #     row += 3
-    #     column -= 9
-    #   end
-    #   @cells << Cell.new(ROW_ID[row], COLUMN_ID[column], block)
-    #   cell_counter += 1
-    # end
   end
 
   def initialize_default_rows
@@ -138,4 +106,4 @@ class Blocks
 end
 
 a = Board.new
-p a.cells
+p a.rows
