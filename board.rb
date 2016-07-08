@@ -152,8 +152,24 @@ class Board
   end
 
   def display_board
-    @rows.each do |row|
-      p row.values
+    cell_counter = 0
+    display_output = ""
+    @cells.each do |cell|
+      1.times do 
+        break if cell_counter == 0
+        if cell_counter % 3 == 0 && cell_counter % 9 != 0
+          display_output += "|"
+        end
+        if cell_counter % 9 == 0
+          display_output += "\n"
+        end
+        if cell_counter % 27 == 0
+          display_output += " -----+------+------\n"
+        end
+      end 
+      display_output += " #{cell.value.to_s}"
+      cell_counter += 1
     end
+    puts display_output
   end
 end
