@@ -11,16 +11,6 @@ The given data is written in such a way that the first 9 numbers start from the 
 Reference point is the top left, same as data. Starting from the first cell which is A1, A2, A3...A9. Next row is B1, B2, B3...B9. 
 
 Todo:
-<!-- 1. Figure out data structure of current sudoku questions.  -->
-3. Need: individual representation of cells, rows, columns, and 3x3 blocks
-
-Methodology:
-
-def solved?
-end
-
-def scan_for_freebee
-end
 
 1. Scan every cell. Pinpoint cells that only have 1 possible solution. Fill them in.
 2. Scan again. Repeat until solved? or no more possible.
