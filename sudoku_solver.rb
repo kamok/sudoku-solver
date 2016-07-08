@@ -17,10 +17,8 @@ class Sudoku
       end
       @board.update_possible_values
       @board.display_board
-      # require 'pry'
-      # binding.pry
     end
-    puts "Congrats."
+    puts "Congrats. You're a cheater!"
   end
 
   private
@@ -30,18 +28,6 @@ class Sudoku
     raw_data.split("").map do |value|
       value == "." ? value = 0 : value.to_i
     end
-
-    # This code makes everything into nested form by row.
-    # [].tap do |nested_data|
-    #   until single_large_array.empty?
-    #     row = []
-    #     9.times do 
-    #       row << single_large_array.shift.to_i
-    #     end
-    #     nested_data << row
-    #   end
-    # end
-
   end
 end
 
