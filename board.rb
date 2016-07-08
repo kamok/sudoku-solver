@@ -12,27 +12,32 @@ class Board
 
   def initialize
     @cells, @rows, @columns, @blocks = [], [], [], []
-    initialize_default_cells
-    initialize_default_rows
-    initialize_default_columns
-    initialize_default_blocks
+    make_board
+    @solved_cells = 0
   end
 
-  # def row(id)
-  #   @rows.each do |row|
-  #     if row.id == id
-  #       return row
-  #     end
-  #   end
-  # end
-
   def set_initial_values(data)
-    #write it inside the cell.value
     @rows.each do |row|
       row.cells.each do |cell|
         cell.value = data.shift
       end
     end
+  end
+
+  def no_more_freebies?
+    freebies_in_current_iteration = 0
+    cells.each do |cell|
+      if cell.value != 0
+        freebies_in_current_iteration += 1
+      end
+    end
+    if freebies_in_current_iteration == @solved_cells
+      announce_max_freebies
+      true
+    else
+      @solved_cells = freebies_in_current_iteration
+      false
+    end 
   end
 
   def update_possible_values                  # This method should remove possible_values from all cells given 
@@ -75,6 +80,70 @@ class Board
         cell.possible_values -= block_values
       end
     end
+  end
+
+  def solved?
+    #Row says OK
+    # solved_rows = 0
+    # rows.each do |row|
+    #   row.cells.each do |cell|
+    #     if cell.value != 0
+
+    #Column says OK
+    #Block says OK
+    # solved_cells = 0
+    # cells.each do |cell|
+    #   if cell.value != 0
+    #     solved_cells += 1
+    #   end
+    # end
+    # if solved_cells == 81
+    #   return true
+    # else
+    #   puts "The number of solved cells are #{solved_cells}."
+    #   return false
+    # end
+  end
+
+  def display_board
+    cell_counter = 0
+    display_output = ""
+    @cells.each do |cell|
+      1.times do 
+        break if cell_counter == 0
+        if cell_counter % 3 == 0 && cell_counter % 9 != 0
+          display_output += "|"
+        end
+        if cell_counter % 9 == 0
+          display_output += "\n"
+        end
+        if cell_counter % 27 == 0
+          display_output += " -----+------+------\n"
+        end
+      end 
+      display_output += " #{cell.value.to_s}"
+      cell_counter += 1
+    end
+    puts display_output
+  end
+
+  private
+
+  def announce_max_freebies
+    solved_cells = 0
+    cells.each do |cell|
+        if cell.value != 0
+          solved_cells += 1
+        end
+      end
+    puts "The number of solved cells is #{solved_cells}."
+  end
+
+  def make_board
+    initialize_default_cells
+    initialize_default_rows
+    initialize_default_columns
+    initialize_default_blocks
   end
 
   def initialize_default_cells
@@ -126,50 +195,5 @@ class Board
       @blocks << Block.new(BLOCK_ID[block_counter], @cells)
       block_counter += 1
     end
-  end
-
-  def solved?
-    #Row says OK
-    # solved_rows = 0
-    # rows.each do |row|
-    #   row.cells.each do |cell|
-    #     if cell.value != 0
-
-    #Column says OK
-    #Block says OK
-    solved_cells = 0
-    cells.each do |cell|
-      if cell.value != 0
-        solved_cells += 1
-      end
-    end
-    if solved_cells == 81
-      return true
-    else
-      puts "The number of solved cells are #{solved_cells}."
-      return false
-    end
-  end
-
-  def display_board
-    cell_counter = 0
-    display_output = ""
-    @cells.each do |cell|
-      1.times do 
-        break if cell_counter == 0
-        if cell_counter % 3 == 0 && cell_counter % 9 != 0
-          display_output += "|"
-        end
-        if cell_counter % 9 == 0
-          display_output += "\n"
-        end
-        if cell_counter % 27 == 0
-          display_output += " -----+------+------\n"
-        end
-      end 
-      display_output += " #{cell.value.to_s}"
-      cell_counter += 1
-    end
-    puts display_output
   end
 end

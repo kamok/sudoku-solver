@@ -12,7 +12,7 @@ class Sudoku
 
   def solve
                           #wrap this inside @board.solved?
-    until @board.solved?      #change to @board.no_more_freebies?
+    until @board.no_more_freebies?      #change to @board.no_more_freebies?
       @board.cells.each(&:solve)
       @board.update_possible_values
       @board.display_board
@@ -20,7 +20,7 @@ class Sudoku
                               #do the permutation brute force
                               #check each permutation. is_permutation_valid?
 
-    puts "Congrats. You're a cheater!"
+    puts "Congrats. Let's build an algorithm to do depth first search !"
   end
 
   private
