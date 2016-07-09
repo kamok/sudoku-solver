@@ -131,15 +131,13 @@ class Board
 
   def make_board
     initialize_default_cells
-    initialize_default_rows
-    initialize_default_columns
-    initialize_default_blocks
+    initialize_default_structure
   end
 
   def initialize_default_cells
     cell_counter, row, column = 0,0,0
     block = 1
-
+    
     until cell_counter == 81
       1.times do 
         break if cell_counter == 0
@@ -163,27 +161,13 @@ class Board
     end
   end
 
-  def initialize_default_rows
-    row_counter = 0
-    until row_counter == 9
-      @rows << Row.new(ROW_ID[row_counter], @cells)
-      row_counter += 1
-    end
-  end
-
-  def initialize_default_columns
-    column_counter = 0
-    until column_counter == 9
-      @columns << Column.new(COLUMN_ID[column_counter], @cells)
-      column_counter += 1
-    end
-  end
-
-  def initialize_default_blocks
-    block_counter = 0
-    until block_counter == 9
-      @blocks << Block.new(BLOCK_ID[block_counter], @cells)
-      block_counter += 1
+  def initialize_default_structure
+    counter = 0
+    until counter == 9
+      @rows << Row.new(ROW_ID[counter], @cells)
+      @columns << Column.new(COLUMN_ID[counter], @cells)
+      @blocks << Block.new(BLOCK_ID[counter], @cells)
+      counter += 1
     end
   end
 end
