@@ -39,6 +39,11 @@ class Sudoku
     #   break if @board.solved?
     # end
 
+    # Approach 2
+    # Convert current board and possible values into a tree
+    # Write out every single possible solution as a lot of strings in embedded hashes
+    # Check them with DFS
+
 
     puts "Congrats. Let's build an algorithm to do depth first search !"
   end
