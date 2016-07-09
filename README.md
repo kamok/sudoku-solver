@@ -12,11 +12,13 @@ Reference point is the top left, same as data. Starting from the first cell whic
 
 Todo:
 
-1. Scan every cell. Pinpoint cells that only have 1 possible solution. Fill them in.
-2. Scan again. Repeat until solved? or no more possible.
 
-Repeat until no more freebies. 
-Then write out all possible board permutations.
+Now: We have a board ready to begin solving. 
+
+Cell.solve sets value of a cell if there's only one left in possible values
+
+Remove and save a "possible_value"
+
 
 Run through a test for every single board configuration.
 3. Assuming branching appears where cells have 2+ possible answers, record branches.

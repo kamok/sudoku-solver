@@ -32,7 +32,7 @@ class Board
       end
     end
     if freebies_in_current_iteration == @solved_cells
-      announce_max_freebies
+      puts "The number of solved cells is #{@solved_cells}."
       true
     else
       @solved_cells = freebies_in_current_iteration
@@ -128,16 +128,6 @@ class Board
   end
 
   private
-
-  def announce_max_freebies
-    solved_cells = 0
-    cells.each do |cell|
-        if cell.value != 0
-          solved_cells += 1
-        end
-      end
-    puts "The number of solved cells is #{solved_cells}."
-  end
 
   def make_board
     initialize_default_cells
