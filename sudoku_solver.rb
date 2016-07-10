@@ -13,11 +13,9 @@ class Sudoku
     end
   end
 
-  def solve   
-
-
-
-
+  def solve
+    # convert possible_values data into many @board objects
+    # check each for solved?    
     # need to save state for every branch? cell.backlog should help us keep track on what we
     # have to test left. 
 
@@ -25,6 +23,7 @@ class Sudoku
     # loop do
         # cell.backlog = []
         # cell.possible_values = [1,2]
+        # for each cell
     #   @board.backtrack     Reverts board to state before branching
     #   loop do
           #tries to solve the board within a branch
@@ -43,8 +42,6 @@ class Sudoku
     # Convert current board and possible values into a tree
     # Write out every single possible solution as a lot of strings in embedded hashes
     # Check them with DFS
-
-
     puts "Congrats. Let's build an algorithm to do depth first search !"
   end
 

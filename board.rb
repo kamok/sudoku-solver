@@ -48,38 +48,9 @@ class Board
       end
     end
 
-    @rows.each do |row|
-      row_values = []
-      row.cells.each do |cell|
-        row_values << cell.value if cell.value > 0  #row_values array has all values of that row 
-      end
-
-      row.cells.each do |cell|
-        cell.possible_values -= row_values
-      end
-    end
-
-    @columns.each do |column|
-      column_values = []
-      column.cells.each do |cell|
-        column_values << cell.value if cell.value > 0
-      end
-
-      column.cells.each do |cell|
-        cell.possible_values -= column_values
-      end
-    end
-
-    @blocks.each do |block|
-      block_values = []
-      block.cells.each do |cell|
-        block_values << cell.value if cell.value > 0
-      end
-
-      block.cells.each do |cell|
-        cell.possible_values -= block_values
-      end
-    end
+    update_structure(@rows)
+    update_structure(@columns)
+    update_structure(@blocks)
   end
 
   def solved?
@@ -124,6 +95,7 @@ class Board
       display_output += " #{cell.value.to_s}"
       cell_counter += 1
     end
+    puts "BOARD"
     puts display_output
   end
 
@@ -168,6 +140,19 @@ class Board
       @columns << Column.new(COLUMN_ID[counter], @cells)
       @blocks << Block.new(BLOCK_ID[counter], @cells)
       counter += 1
+    end
+  end
+  
+  def update_structure(structure)
+    structure.each do |struct|
+      structure_values = []
+      struct.cells.each do |cell|
+        structure_values << cell.value if cell.value > 0
+      end
+
+      struct.cells.each do |cell|
+        cell.possible_values -= structure_values
+      end
     end
   end
 end
