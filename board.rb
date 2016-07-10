@@ -40,17 +40,11 @@ class Board
     end 
   end
 
-  def update_possible_values                  # This method should remove possible_values from all cells given 
-                                              # the current state of the board.
-    @cells.each do |cell|   
-      if cell.value != 0                      #if a block has value, then all possible_values are deleted
-        cell.possible_values.clear 
-      end
-    end
+  def update_possible_values # This method should remove possible_values from all cells given the current state of the board.
+    
+    @cells.each {|cell| cell.possible_values.clear if cell.value != 0}
 
-    update_structure(@rows)
-    update_structure(@columns)
-    update_structure(@blocks)
+    update_structure(@rows) && update_structure(@columns) && update_structure(@blocks)
   end
 
   def solved?
@@ -142,7 +136,7 @@ class Board
       counter += 1
     end
   end
-  
+
   def update_structure(structure)
     structure.each do |struct|
       structure_values = []

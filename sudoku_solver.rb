@@ -53,6 +53,7 @@ class Sudoku
       value == "." ? value = 0 : value.to_i
     end
   end
+  
 end
 
 a = Sudoku.new
