@@ -35,7 +35,10 @@ class Board
   def solve!
     display_board
     return false unless valid?
-    return true if solved?
+    if solved?
+      update_array_representation
+      return  @array_representation
+    end
 
     next_cell = get_next_cell
     # require 'pry'

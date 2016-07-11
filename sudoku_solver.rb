@@ -14,8 +14,9 @@ class Sudoku
   end
 
   def solve
-    @board.solve!
+    answer = @board.solve!
     puts "Congrats."
+    puts "Here's your array: #{answer}"
   end
 
   private
