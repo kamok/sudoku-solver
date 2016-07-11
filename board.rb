@@ -26,7 +26,7 @@ class Board
     end
   end
 
-  def update_possible_values # This method should remove possible_values from all cells given the current state of the board.
+  def update_possible_values
     @cells.each {|cell| cell.possible_values.clear if cell.value != 0}
 
     update_structure(@rows) && update_structure(@columns) && update_structure(@blocks)

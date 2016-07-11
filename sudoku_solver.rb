@@ -9,7 +9,6 @@ class Sudoku
     until @board.no_more_freebies? 
       @board.update_possible_values 
       @board.cells.each(&:solve)
-      @board.display_board
     end
   end
 
@@ -20,10 +19,8 @@ class Sudoku
         puts "This sudoku puzzle is invalid."
       else
         puts "Congrats you cheater!"
-        puts "Here's your array: #{answer}"
         puts "Here's your string #{answer.join}"
       end
-    
   end
 
   private
@@ -40,5 +37,5 @@ end
 a = Sudoku.new
 ##the string below is world's hardest sudoku puzzle
 #"800000000003600000070090200050007000000045700000100030001000068008500010090000400"
-a.set_game("800000000003600000070090200050007000000045700000100030001000068008500010090000400")
+a.set_game(".94...13..............76..2.8..1.....32.........2...6.....5.4.......8..7..63.4..8")
 a.solve
