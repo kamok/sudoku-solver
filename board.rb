@@ -19,7 +19,7 @@ class Board
 
   def update_array_representation
     @array_representation = 
-    [].tap do|string|
+    [].tap do |string|
       cells.each do |cell|
         string << cell.value
       end
@@ -38,6 +38,8 @@ class Board
     return true if solved?
 
     next_cell = get_next_cell
+    # require 'pry'
+    # binding.pry
 
     (next_cell.possible_values).each do |attempt|
       next_cell.value = attempt                    ##if update, it be even faster?
@@ -52,7 +54,8 @@ class Board
   end
 
   def get_next_cell
-    cells.each { |cell| return cell if cell.value == 0 }  #make it choose a better one.
+    update_possible_values
+    cells.sort_by { |cell| cell.possible_values.count }.each { |cell| return cell if cell.value == 0 }
   end
 
   def solved?
@@ -91,7 +94,7 @@ class Board
       display_output += " #{cell.value.to_s}"
       cell_counter += 1
     end
-    puts "BOARD"
+    puts "CALCULATING!"
     puts display_output
   end
 
