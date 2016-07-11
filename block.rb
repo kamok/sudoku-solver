@@ -13,7 +13,7 @@ class Block
   def values
     [].tap do |value_collection|
       @cells.each do |cell|
-        value_collection << cell.value
+        value_collection << cell.value if cell.value != 0
       end
     end
   end

@@ -15,7 +15,7 @@ class Sudoku
 
   def solve
     @board.solve!
-    puts "Congrats. Let's build an algorithm to do depth first search !"
+    puts "Congrats."
   end
 
   private
@@ -30,8 +30,5 @@ class Sudoku
 end
 
 a = Sudoku.new
-a.set_game("39.82.7..8.15...69.2.16.4.3..2.96.58935...6.2.6.752.3.7.3941...2...3759..19...347")
-# a.solve
-# a.board.cells.each do |cell| 
-#   p cell
-# end
+a.set_game("100900000080070400405002000000000003900036070000010090000240000204501008000000700")
+a.solve

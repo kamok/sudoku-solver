@@ -14,29 +14,62 @@ class Board
     @cells, @rows, @columns, @blocks = [], [], [], []
     make_board
     @solved_cells = 0
+    @array_representation = nil
+  end
+
+  def update_array_representation
+    @array_representation = 
+    [].tap do|string|
+      cells.each do |cell|
+        string << cell.value
+      end
+    end
   end
 
   def update_possible_values # This method should remove possible_values from all cells given the current state of the board.
     @cells.each {|cell| cell.possible_values.clear if cell.value != 0}
 
     update_structure(@rows) && update_structure(@columns) && update_structure(@blocks)
-    require 'pry'
-    binding.pry
   end
 
   def solve!
+    display_board
     return false unless valid?
-    return display_board if solved?
+    return true if solved?
+
+    next_cell = get_next_cell
+
+    (next_cell.possible_values).each do |attempt|
+      next_cell.value = attempt                    ##if update, it be even faster?
+      update_array_representation
+      a = Board.new
+      a.set_initial_values(@array_representation)
+      solution = a.solve!
+      return solution if solution
+    end
+
+    return false
+  end
+
+  def get_next_cell
+    cells.each { |cell| return cell if cell.value == 0 }  #make it choose a better one.
+  end
+
+  def solved?
+    cells.each do |cell|
+      return false if cell.value == 0
+    end
   end
 
   def valid?
-    return true if no_dups?(rows) && no_dups?(columns) && no_dups?(blocks)
+    no_dups?(rows) && no_dups?(columns) && no_dups?(blocks)
   end
 
   def no_dups?(structure)
     structure.each do |struct|
       return false if struct.values.uniq.length != struct.values.length
     end
+    true
   end
 
   def display_board
