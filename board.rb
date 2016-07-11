@@ -41,11 +41,9 @@ class Board
     end
 
     next_cell = get_next_cell
-    # require 'pry'
-    # binding.pry
 
     (next_cell.possible_values).each do |attempt|
-      next_cell.value = attempt                    ##if update, it be even faster?
+      next_cell.value = attempt                  
       update_array_representation
       a = Board.new
       a.set_initial_values(@array_representation)

@@ -15,8 +15,15 @@ class Sudoku
 
   def solve
     answer = @board.solve!
-    puts "Congrats."
-    puts "Here's your array: #{answer}"
+    case answer 
+      when false
+        puts "This sudoku puzzle is invalid."
+      else
+        puts "Congrats you cheater!"
+        puts "Here's your array: #{answer}"
+        puts "Here's your string #{answer.join}"
+      end
+    
   end
 
   private
@@ -31,5 +38,7 @@ class Sudoku
 end
 
 a = Sudoku.new
-a.set_game("100900000080070400405002000000000003900036070000010090000240000204501008000000700")
+##the string below is world's hardest sudoku puzzle
+#"800000000003600000070090200050007000000045700000100030001000068008500010090000400"
+a.set_game("800000000003600000070090200050007000000045700000100030001000068008500010090000400")
 a.solve
