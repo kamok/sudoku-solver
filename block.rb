@@ -9,4 +9,12 @@ class Block
     end
     @id = block_id
   end
+
+  def values
+    [].tap do |value_collection|
+      @cells.each do |cell|
+        value_collection << cell.value
+      end
+    end
+  end
 end

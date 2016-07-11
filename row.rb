@@ -11,11 +11,11 @@ class Row
     @id = row_id
   end
 
-  # def values
-  #   values = []
-  #   @cells.each do |cell|
-  #     values << cell.value
-  #   end
-  #   values
-  # end
+  def values
+    [].tap do |value_collection|
+      @cells.each do |cell|
+        value_collection << cell.value
+      end
+    end
+  end
 end

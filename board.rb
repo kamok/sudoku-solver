@@ -16,58 +16,27 @@ class Board
     @solved_cells = 0
   end
 
-  def set_initial_values(data)
-    @rows.each do |row|
-      row.cells.each do |cell|
-        cell.value = data.shift
-      end
-    end
-  end
-
-  def no_more_freebies?
-    freebies_in_current_iteration = 0
-    cells.each do |cell|
-      if cell.value != 0
-        freebies_in_current_iteration += 1
-      end
-    end
-    if freebies_in_current_iteration == @solved_cells
-      puts "The number of solved cells is #{@solved_cells}."
-      true
-    else
-      @solved_cells = freebies_in_current_iteration
-      false
-    end 
-  end
-
   def update_possible_values # This method should remove possible_values from all cells given the current state of the board.
-    
     @cells.each {|cell| cell.possible_values.clear if cell.value != 0}
 
     update_structure(@rows) && update_structure(@columns) && update_structure(@blocks)
+    require 'pry'
+    binding.pry
   end
 
-  def solved?
-    #Row says OK
-    # solved_rows = 0
-    # rows.each do |row|
-    #   row.cells.each do |cell|
-    #     if cell.value != 0
+  def solve!
+    return false unless valid?
+    return display_board if solved?
+  end
 
-    #Column says OK
-    #Block says OK
-    # solved_cells = 0
-    # cells.each do |cell|
-    #   if cell.value != 0
-    #     solved_cells += 1
-    #   end
-    # end
-    # if solved_cells == 81
-    #   return true
-    # else
-    #   puts "The number of solved cells are #{solved_cells}."
-    #   return false
-    # end
+  def valid?
+    return true if no_dups?(rows) && no_dups?(columns) && no_dups?(blocks)
+  end
+
+  def no_dups?(structure)
+    structure.each do |struct|
+      return false if struct.values.uniq.length != struct.values.length
+    end
   end
 
   def display_board
@@ -91,6 +60,30 @@ class Board
     end
     puts "BOARD"
     puts display_output
+  end
+
+  def no_more_freebies?
+    freebies_in_current_iteration = 0
+    cells.each do |cell|
+      if cell.value != 0
+        freebies_in_current_iteration += 1
+      end
+    end
+    if freebies_in_current_iteration == @solved_cells
+      puts "The number of solved cells is #{@solved_cells}."
+      true
+    else
+      @solved_cells = freebies_in_current_iteration
+      false
+    end 
+  end
+
+  def set_initial_values(data)
+    @rows.each do |row|
+      row.cells.each do |cell|
+        cell.value = data.shift
+      end
+    end
   end
 
   private

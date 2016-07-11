@@ -27,3 +27,32 @@ Run through a test for every single board configuration.
 6. Repeat until all branches are done.
 7. Hopefully this method is fool-proof
 
+Notes for solve:
+    # convert possible_values data into many @board objects
+    # check each for solved?    
+    # need to save state for every branch? cell.backlog should help us keep track on what we
+    # have to test left. 
+
+    # Approach 1
+    # loop do
+        # cell.backlog = []
+        # cell.possible_values = [1,2]
+        # for each cell
+    #   @board.backtrack     Reverts board to state before branching
+    #   loop do
+          #tries to solve the board within a branch
+            #@board.solve 
+              #cell.backlog << cell.possible_values until cell.possible_values.count == 1
+              #cell.solve
+
+              #Either do this next step without changning possible_values or find way to save state
+              #@board.update_possible_values 
+    #     break if @board.has_conflict? || @board.solved? #deletes the branch if has_conflict
+    #   end
+    #   break if @board.solved?
+    # end
+
+    # Approach 2
+    # Convert current board and possible values into a tree
+    # Write out every single possible solution as a lot of strings in embedded hashes
+    # Check them with DFS
