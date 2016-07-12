@@ -13,7 +13,7 @@ class Board
   def initialize
     @cells, @rows, @columns, @blocks = [], [], [], []
     make_board
-    @solved_cells = 0
+    @number_of_solved_cells = 0
     @array_representation = nil
   end
 
@@ -106,11 +106,10 @@ class Board
         freebies_in_current_iteration += 1
       end
     end
-    if freebies_in_current_iteration == @solved_cells
-      puts "The number of solved cells is #{@solved_cells}."
+    if freebies_in_current_iteration == @number_of_solved_cells
       true
     else
-      @solved_cells = freebies_in_current_iteration
+      @number_of_solved_cells = freebies_in_current_iteration
       false
     end 
   end
