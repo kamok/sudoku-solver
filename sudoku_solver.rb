@@ -4,8 +4,8 @@ class Sudoku
   attr_reader :board
   def set_game(data)
     data = parse_import(data)
-    @board = Board.new
-    @board.set_initial_values(data)
+    @board = Board.new(data)
+    @board.set_initial_values
     until @board.no_more_freebies? 
       @board.update_possible_values 
       @board.cells.each(&:solve)
@@ -26,7 +26,6 @@ class Sudoku
   private
 
   def parse_import(raw_data)
-    single_large_array = 
     raw_data.split("").map do |value|
       value == "." ? value = 0 : value.to_i
     end

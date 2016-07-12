@@ -10,11 +10,11 @@ class Board
   COLUMN_ID = ["1","2","3","4","5","6","7","8","9"]
   BLOCK_ID = COLUMN_ID
 
-  def initialize
+  def initialize(data)
     @cells, @rows, @columns, @blocks = [], [], [], []
     make_board
     @number_of_solved_cells = 0
-    @array_representation = nil
+    @array_representation = data
   end
 
   def update_array_representation
@@ -45,8 +45,8 @@ class Board
     (next_cell.possible_values).each do |attempt|
       next_cell.value = attempt                  
       update_array_representation
-      a = Board.new
-      a.set_initial_values(@array_representation)
+      a = Board.new(@array_representation)
+      a.set_initial_values
       solution = a.solve!
       return solution if solution
     end
@@ -114,10 +114,11 @@ class Board
     end 
   end
 
-  def set_initial_values(data)
+  def set_initial_values
+    copy_of_array = @array_representation.dup
     @rows.each do |row|
       row.cells.each do |cell|
-        cell.value = data.shift
+        cell.value = copy_of_array.shift
       end
     end
   end
