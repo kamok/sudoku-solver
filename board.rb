@@ -101,11 +101,7 @@ class Board
 
   def set_initial_values
     copy_of_array = @array_representation.dup
-    @rows.each do |row|
-      row.cells.each do |cell|
-        cell.value = copy_of_array.shift
-      end
-    end
+    cells.each { |cell| cell.value = copy_of_array.shift }
   end
 
   private
