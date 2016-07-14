@@ -131,29 +131,8 @@ class Board
   end
 
   def initialize_default_cells
-    cell_counter, row, column = 0,0,0
-    block = 1
-    
-    until cell_counter == 81
-      1.times do 
-        break if cell_counter == 0
-        if cell_counter % 1 == 0
-          column += 1
-        end
-        if cell_counter % 3 == 0
-          block += 1
-        end
-        if cell_counter % 9 == 0
-          column -= 9
-          row += 1
-          block -= 3
-        end
-        if cell_counter % 27 == 0
-          block += 3
-        end
-      end
-      @cells << Cell.new(ROW_ID[row], COLUMN_ID[column], block)
-      cell_counter += 1
+    (0..80).each do |i|
+      @cells << Cell.new(ROW_ID[i/9], COLUMN_ID[i%9], 1 + (i%9)/3 + 3*(i/27))
     end
   end
 
