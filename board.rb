@@ -90,11 +90,7 @@ class Board
 
   def no_more_freebies?
     freebies_in_current_iteration = 0
-    cells.each do |cell|
-      if cell.value != 0
-        freebies_in_current_iteration += 1
-      end
-    end
+    cells.each { |cell| freebies_in_current_iteration += 1 if cell.value != 0 }
     if freebies_in_current_iteration == @number_of_solved_cells
       true
     else
