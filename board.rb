@@ -130,13 +130,9 @@ class Board
   def update_structure(structure)
     structure.each do |struct|
       structure_values = []
-      struct.cells.each do |cell|
-        structure_values << cell.value if cell.value > 0
-      end
+      struct.cells.each { |cell| structure_values << cell.value if cell.value > 0 }
 
-      struct.cells.each do |cell|
-        cell.possible_values -= structure_values
-      end
+      struct.cells.each { |cell| cell.possible_values -= structure_values }
     end
   end
 end
