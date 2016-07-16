@@ -2,7 +2,9 @@ require_relative "board"
 
 class Sudoku
   attr_reader :board
+
   def set_game(data)
+    return puts "Your puzzle is missing values." if data.length != 81
     data = parse_import(data)
     @board = Board.new(data)
     @board.set_initial_values
@@ -13,6 +15,7 @@ class Sudoku
   end
 
   def solve
+    return puts "Can't solve because the board was not initialized." if @board.nil?
     answer = @board.solve!
     case answer 
       when false
@@ -35,5 +38,6 @@ end
 
 a = Sudoku.new
 ##the string below is world's hardest sudoku puzzle
-a.set_game("8000000000036000000700902000500070000000457000001000300010000680085000100900004008")
+##"800000000003600000070090200050007000000045700000100030001000068008500010090000400"
+a.set_game("800000000003600000070090200050007000000045700000100030001000068008500010090000400")
 a.solve
